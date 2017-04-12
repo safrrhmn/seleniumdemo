@@ -14,43 +14,44 @@ import org.openqa.selenium.WebDriver;
 @RunWith(Parameterized.class)
 public class GitHubFeaturesPageTests extends BaseTest {
 
-    private static WebDriver driver;
-    private static WebDriverType[] values;
-    private GitHubFeaturePage gitHubFeaturePage;
+	private static WebDriver		driver;
+	private static WebDriverType[]	values;
+	private GitHubFeaturePage		gitHubFeaturePage;
 
-    public GitHubFeaturesPageTests(WebDriverType type) {
-        System.out.println(type);
-        driver = WebDriverFactory.createWebDriver(TestType.LOCAL, type);
-    }
+	public GitHubFeaturesPageTests(WebDriverType type) {
+		System.out.println(type);
+		driver = WebDriverFactory.createWebDriver(TestType.REMOTE, type);
+	}
 
-    @Parameterized.Parameters
-    public static WebDriverType[] repeatableBrowserType() {
-        values = WebDriverType.values();
-        return values;
-    }
+	@Parameterized.Parameters
+	public static WebDriverType[] repeatableBrowserType() {
 
-    @After
-    public void testDown() {
-        driver.quit();
-    }
+		values = WebDriverType.values();
+		return values;
+	}
 
-    @Before
-    public void setPageState() {
+	@After
+	public void testDown() {
 
+		driver.quit();
+	}
 
-        gitHubFeaturePage = new GitHubLandingPage().goToFeaturePage();
-    }
+	@Before
+	public void setPageState() {
 
-    @Test
-    public void gitHubFeaturesNavigationTest() {
+		gitHubFeaturePage = new GitHubLandingPage().goToFeaturePage();
+	}
 
-        Assert.assertEquals(getWebDriver().getTitle(),
-                "Features For Collaborative Coding - Developers Work Better, Together | GitHub · GitHub");
-    }
+	@Test
+	public void gitHubFeaturesNavigationTest() {
 
-    @Test
-    public void pageTextTest() {
-        String headerText = gitHubFeaturePage.getHeaderText();
-        Assert.assertTrue(headerText.equals("How developers work"));
-    }
+		Assert.assertTrue(gitHubFeaturePage.getCurrentURL().contains("features"));
+	}
+
+	@Test
+	public void pageTextTest() {
+
+		String headerText = gitHubFeaturePage.getHeaderText();
+		Assert.assertTrue(headerText.equals("How developers work"));
+	}
 }

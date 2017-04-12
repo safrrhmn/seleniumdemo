@@ -1,7 +1,6 @@
 package com.demo.github.pageobjects;
 
 import com.demo.github.core.Navigation;
-import org.openqa.selenium.WebDriver;
 
 
 public class GitHubLandingPage extends BasePage {
