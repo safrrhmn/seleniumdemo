@@ -1,16 +1,13 @@
 package com.demo.github.core;
 
-
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 
 public class WebDriverFactory {
@@ -51,6 +48,7 @@ public class WebDriverFactory {
         }
         try {
             currentDriver = new RemoteWebDriver(new URL("http://10.100.11.13:4444/wd/hub"), capabilities);
+            currentDriver.manage().window().maximize();
         } catch (MalformedURLException e) {
             throw new IllegalStateException("Could not start RemoteWebDriver " + e);
         }

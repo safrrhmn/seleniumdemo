@@ -4,6 +4,7 @@ import com.demo.github.base.BaseTest;
 import com.demo.github.core.TestType;
 import com.demo.github.core.WebDriverFactory;
 import com.demo.github.core.WebDriverType;
+import com.demo.github.pageobjects.GitHubFeaturePage;
 import com.demo.github.pageobjects.GitHubLandingPage;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -15,6 +16,7 @@ public class GitHubFeaturesPageTests extends BaseTest {
 
     private static WebDriver driver;
     private static WebDriverType[] values;
+    private GitHubFeaturePage gitHubFeaturePage;
 
     public GitHubFeaturesPageTests(WebDriverType type) {
         System.out.println(type);
@@ -34,7 +36,9 @@ public class GitHubFeaturesPageTests extends BaseTest {
 
     @Before
     public void setPageState() {
-        new GitHubLandingPage().goToFeaturePage();
+
+
+        gitHubFeaturePage = new GitHubLandingPage().goToFeaturePage();
     }
 
     @Test
@@ -42,5 +46,11 @@ public class GitHubFeaturesPageTests extends BaseTest {
 
         Assert.assertEquals(getWebDriver().getTitle(),
                 "Features For Collaborative Coding - Developers Work Better, Together | GitHub · GitHub");
+    }
+
+    @Test
+    public void pageTextTest() {
+        String headerText = gitHubFeaturePage.getHeaderText();
+        Assert.assertTrue(headerText.equals("How developers work"));
     }
 }
